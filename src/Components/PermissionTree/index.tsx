@@ -220,7 +220,8 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
     const isCheckboxDisabled = isAdmin ? true : node.isSpecial !== "0" ? true : isLowSecurity ? true : false;
 
     const ChevronIcon = () => (
-      <svg  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
+      <svg 
+        width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"
         style={{ 
           transform: isExpanded ? 'rotate(90deg)' : 'rotate(0deg)', 
           transition: 'transform 0.2s',

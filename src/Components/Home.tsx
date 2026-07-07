@@ -9,7 +9,7 @@ export default function Home() {
                 <div className="custom-container">
                     <div className="hero-grid">
                         <div className="hero-content">
-                            <h1>Best Design Offices</h1>
+                            <h1>Best Design IMFGS</h1>
                             <p>Most workplaces of dreams are splashed sprawling outdoor color saturated nooks are some hallmarks. Most lovers of design would all work in awesome office spaces.</p>
                         </div>
                         <div className="hero-image-box">
@@ -23,8 +23,8 @@ export default function Home() {
                 <div className="custom-container">
                     <div className="split-layout">
                         <div className="text-block">
-                            <h2>The coolest workplaces offices in the world</h2>
-                            <p>Best office design of group layout. Are coolest workplaces offices in the world. Architecture studio architecture life. Home office best design interior luxury offices. Office design ideas make work my home organization.</p>
+                            <h2>The coolest workplaces IMFGS in the world</h2>
+                            <p>Best office design of group layout. Are coolest workplaces IMFGS in the world. Architecture studio architecture life. Home office best design interior luxury IMFGS. Office design ideas make work my home organization.</p>
                             <button className="btn-dark-flat">Read More</button>
                         </div>
                         <div className="image-badge-block">
@@ -55,7 +55,7 @@ export default function Home() {
                 <div className="custom-container">
                     <div className="section-header">
                         <h2>Office Design Gallery</h2>
-                        <p>Coolest office a new cool of in world best office around. spaces incl annual of coolest headquarters check all these more best worlds offices.</p>
+                        <p>Coolest office a new cool of in world best office around. spaces incl annual of coolest headquarters check all these more best worlds IMFGS.</p>
                     </div>
                     <div className="gallery-four-col">
                         <div className="img-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Gallery 1" /></div>
@@ -117,9 +117,9 @@ export default function Home() {
             <footer className="main-footer">
                 <div className="custom-container">
                     <div className="footer-flex">
-                        <span className="brand">Office Design Gallery</span>
+                        <span className="brand">IMFGS Design Gallery</span>
                         <div className="footer-links">
-                            <span>© 2026 Office Design Gallery</span>
+                            <span>© 2026 IMFGS Design Gallery</span>
                             <a href="#">Privacy</a>
                             <a href="#">Terms</a>
                         </div>
