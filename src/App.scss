@@ -1,0 +1,394 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+// Variables
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$color-dark: #2b2d2f;
+$color-bg-light: #eaeaea;
+$color-beige: #e3a87c;
+$color-text-muted: #777;
+$font-family: 'Inter', sans-serif;
+$breakpoint-md: 768px;
+
+// Nesting base wrapper to avoid global styling conflicts
+.office-gallery-wrapper {
+  font-family: $font-family;
+  background-color: #fdfdfd;
+  color: #333;
+  overflow-x: hidden;
+
+  // Global Components inside wrapper
+  .custom-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  // Common Layout Helpers
+  .split-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+
+    @media (min-width: $breakpoint-md) {
+      flex-direction: row;
+      & > * {
+        flex: 1;
+      }
+      &.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+    &.align-stretch {
+      align-items: stretch;
+    }
+  }
+
+  // Buttons
+  .btn-dark-flat {
+    background: $color-dark;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    text-uppercase: true;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .btn-beige {
+    @extend .btn-dark-flat;
+    background: $color-beige;
+    color: #000;
+    font-weight: bold;
+  }
+
+  // 1. HERO SECTION SCSS
+  .hero-section {
+    background-color: $color-bg-light;
+    padding: 60px 0;
+    position: relative;
+    min-height: 400px;
+
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      @media (min-width: $breakpoint-md) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .hero-content {
+      background: $color-dark;
+      color: white;
+      padding: 40px;
+      z-index: 2;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+      @media (min-width: $breakpoint-md) {
+        width: 45%;
+        position: absolute;
+        left: 0;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+      p {
+        font-size: 13px;
+        color: #ccc;
+        line-height: 1.6;
+      }
+    }
+
+    .hero-image-box {
+      width: 100%;
+      @media (min-width: $breakpoint-md) {
+        width: 70%;
+        margin-left: auto;
+      }
+      img {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  // 2. COOLEST WORKPLACES
+  .coolest-workplaces {
+    padding: 80px 0;
+
+    .text-block {
+      h2 {
+        font-weight: bold;
+        border-left: 4px solid $color-dark;
+        padding-left: 15px;
+        margin-bottom: 20px;
+      }
+      p {
+        color: $color-text-muted;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+      }
+    }
+
+    .image-badge-block {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+
+      .badge-card {
+        position: absolute;
+        bottom: -20px;
+        left: 10%;
+        background: $color-dark;
+        color: white;
+        padding: 15px 25px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+        h3 {
+          margin: 0;
+          font-size: 2rem;
+          font-weight: bold;
+        }
+        span {
+          font-size: 10px;
+          color: #aaa;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+
+  // 3. ICON STRIP
+  .icon-strip {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    padding: 25px 0;
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      text-align: center;
+
+      @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: #555;
+      text-transform: uppercase;
+
+      i {
+        font-size: 140px;
+        margin-bottom: 8px;
+        font-style: normal;
+        background: #f5f5f5;
+      }
+    }
+  }
+
+  // 4. GALLERY SECTION
+  .gallery-section {
+    padding: 80px 0;
+    text-align: center;
+
+    .section-header {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      h2 {
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+      p {
+        color: $color-text-muted;
+        font-size: 14px;
+      }
+    }
+
+    .gallery-four-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+
+      @media (min-width: 576px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .img-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        img {
+          height: 220px;
+        }
+      }
+    }
+  }
+
+  // 5. EFFICIENT LAYOUTS (DARK)
+  .efficient-layouts-section {
+    background-color: $color-dark;
+    padding: 80px 0;
+
+    .text-block h2 {
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .text-block p {
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .bottom-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 50px;
+
+      @media (min-width: $breakpoint-md) {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      img {
+        height: 140px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  // 6. TIPS & IDEAS SECTION
+  .tips-ideas-section {
+    padding: 80px 0;
+
+    .tips-box {
+      background: #f9f9f9;
+      padding: 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+      .accent-title {
+        font-weight: bold;
+        border-left: 3px solid $color-dark;
+        padding-left: 10px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .numbered-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-size: 15px;
+
+        span {
+          color: #bbb;
+          margin-right: 15px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .quad-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+
+      .cell img {
+        height: 160px;
+      }
+
+      .text-card {
+        background: #f9f9f9;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h5 {
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+        p {
+          font-size: 11px;
+          color: $color-text-muted;
+          margin-bottom: 15px;
+        }
+        .learn-more {
+          text-decoration: none;
+          color: #000;
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  // 7. FOOTER
+  .main-footer {
+    background: $color-dark;
+    color: white;
+    padding: 25px 0;
+    font-size: 13px;
+
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .brand {
+      font-weight: bold;
+    }
+
+    .footer-links {
+      color: #888;
+      span {
+        margin-right: 20px;
+      }
+      a {
+        color: #888;
+        text-decoration: none;
+        margin-left: 15px;
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
