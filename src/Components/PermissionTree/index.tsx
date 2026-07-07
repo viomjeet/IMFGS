@@ -18,6 +18,7 @@ interface PermissionNode {
   htmlFlag: string;
   htmlContent: string;
   children?: PermissionNode[];
+  [key: string]: any;
 }
 
 interface ApiResponse {
@@ -29,11 +30,13 @@ interface ApiResponse {
 const buildTree = (list: PermissionNode[]): PermissionNode[] => {
   const map: { [key: string]: PermissionNode } = {};
   const roots: PermissionNode[] = [];
-  list.forEach((node) => {
+  const filteredList = list.filter(node => !node.isbookkeepingsubscriptionhotels);
+
+  filteredList.forEach((node) => {
     map[node.childID] = { ...node, children: [] };
   });
 
-  list.forEach((node) => {
+  filteredList.forEach((node) => {
     const mappedNode = map[node.childID];
     if (node.parentID === "0" || !map[node.parentID]) {
       roots.push(mappedNode);
@@ -42,6 +45,19 @@ const buildTree = (list: PermissionNode[]): PermissionNode[] => {
     }
   });
   return roots;
+};
+
+const findParentPath = (nodes: PermissionNode[], targetId: string, currentPath: string[] = []): string[] | null => {
+  for (const node of nodes) {
+    if (node.childID === targetId) {
+      return currentPath;
+    }
+    if (node.children && node.children.length > 0) {
+      const path = findParentPath(node.children, targetId, [...currentPath, node.childID]);
+      if (path) return path;
+    }
+  }
+  return null;
 };
 
 export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
@@ -54,7 +70,7 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(() => {
     const initialSelected = new Set<string>();
     apiData.result.forEach(item => {
-      if (item.isChecked === "Yes") {
+      if (item.isChecked === "Yes" && !item.isbookkeepingsubscriptionhotels) {
         initialSelected.add(item.childID);
       }
     });
@@ -63,6 +79,7 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
 
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set());
   const treeData = useMemo(() => buildTree(apiData.result), [apiData]);
+
   const getAllChildIds = (node: PermissionNode, ids: string[] = []): string[] => {
     if (node.children) {
       node.children.forEach(child => {
@@ -73,18 +90,6 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
     return ids;
   };
 
-  const findParentPath = (nodes: PermissionNode[], targetId: string, currentPath: string[] = []): string[] | null => {
-    for (const node of nodes) {
-      if (node.childID === targetId) {
-        return currentPath;
-      }
-      if (node.children && node.children.length > 0) {
-        const path = findParentPath(node.children, targetId, [...currentPath, node.childID]);
-        if (path) return path;
-      }
-    }
-    return null;
-  };
   useEffect(() => {
     if (!searchTerm.trim()) {
       setExpandedIds(new Set());
@@ -95,7 +100,7 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
     const lowerSearch = searchTerm.toLowerCase();
 
     apiData.result.forEach(item => {
-      if (item.menuName.toLowerCase().includes(lowerSearch)) {
+      if (item.menuName.toLowerCase().includes(lowerSearch) && !item.isbookkeepingsubscriptionhotels) {
         const parentPath = findParentPath(treeData, item.childID);
         if (parentPath) {
           parentPath.forEach(pId => nextExpanded.add(pId));
@@ -107,8 +112,9 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
   }, [searchTerm, apiData, treeData]);
 
   const handleExpandAllToggle = () => {
-    const allParentIds = apiData.result
-      .filter(item => apiData.result.some(child => child.parentID === item.childID))
+    const validData = apiData.result.filter(item => !item.isbookkeepingsubscriptionhotels);
+    const allParentIds = validData
+      .filter(item => validData.some(child => child.parentID === item.childID))
       .map(item => item.childID);
 
     if (expandedIds.size === allParentIds.length) {
@@ -163,21 +169,21 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
   };
 
   const renderHighlightedText = (text: string, search: string) => {
-  if (!search.trim()) return <span>{text}</span>;
-  const regex = new RegExp(`(${search.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-  const parts = text.split(regex);
-  return (
-    <span>
-      {parts.map((part, index) => 
-        regex.test(part) ? (
-          <mark key={index} style={{ backgroundColor: '#ccf2f4', padding: '2px 0', color: 'inherit', borderRadius: 2 }}>{part}</mark>
-        ) : (
-          part
-        )
-      )}
-    </span>
-  );
-};
+    if (!search.trim()) return <span>{text}</span>;
+    const regex = new RegExp(`(${search.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+    const parts = text.split(regex);
+    return (
+      <span>
+        {parts.map((part, index) => 
+          regex.test(part) ? (
+            <mark key={index} style={{ backgroundColor: '#ccf2f4', padding: '2px 0', color: 'inherit', borderRadius: 2 }}>{part}</mark>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
 
   const CustomCheckbox = ({ checked, disabled, onChange }: { checked: boolean; disabled: boolean; onChange: (e: any) => void }) => {
     return (
@@ -323,7 +329,8 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
     );
   };
 
-  const allParentsCount = apiData.result.filter(item => apiData.result.some(child => child.parentID === item.childID)).length;
+  const validParents = apiData.result.filter(item => !item.isbookkeepingsubscriptionhotels);
+  const allParentsCount = validParents.filter(item => validParents.some(child => child.parentID === item.childID)).length;
   const isAllExpanded = expandedIds.size === allParentsCount;
 
   return (
