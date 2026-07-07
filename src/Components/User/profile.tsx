@@ -22,9 +22,9 @@ export default function Profile() {
               </div>
 
               <div className="profile-socials">
-                <a href="#" className="social-icon">🌐</a>
-                <a href="#" className="social-icon">💼</a>
-                <a href="#" className="social-icon">📸</a>
+                <span className="social-icon">🌐</span>
+                <span className="social-icon">📸</span>
+                <span className="social-icon">💼</span>
               </div>
             </div>
           </aside>

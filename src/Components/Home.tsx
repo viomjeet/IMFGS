@@ -1,6 +1,3 @@
-import React from 'react';
-import { Container, Row, Col, Card, Button, Nav } from 'react-bootstrap';
-
 export default function Home() {
     return (
         <div className="office-gallery-wrapper">
@@ -106,7 +103,7 @@ export default function Home() {
                                 <div className="cell text-card">
                                     <h5>Creative Office Layout Ideas</h5>
                                     <p>New ideas for your office layout do not have to be time consuming or expensive.</p>
-                                    <a href="#" className="learn-more">Learn more →</a>
+                                    <span className="learn-more">Learn more →</span>
                                 </div>
                             </div>
                         </div>
@@ -120,8 +117,8 @@ export default function Home() {
                         <span className="brand">IMFGS Design Gallery</span>
                         <div className="footer-links">
                             <span>© 2026 IMFGS Design Gallery</span>
-                            <a href="#">Privacy</a>
-                            <a href="#">Terms</a>
+                            <span>Privacy</span>
+                            <span>Terms</span>
                         </div>
                     </div>
                 </div>
