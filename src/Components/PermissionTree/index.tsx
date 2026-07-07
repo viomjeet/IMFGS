@@ -313,7 +313,7 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
           )}
 
           {node.isSensetive === "1" && (
-            <span className="badge ml-2" style={{ backgroundColor: '#fdf2e9', color: '#e67e22', padding: '4px 8px', fontSize: 11, border: '1px solid #fadbd8', ...opacityStyle }}>
+            <span className="badge ml-2" style={{ backgroundColor: '#fdf2e9', marginLeft:'6px',  color: '#e67e22', padding: '4px 8px', fontSize: 11, border: '1px solid #fadbd8', ...opacityStyle }}>
               Sensitive
             </span>
           )}
