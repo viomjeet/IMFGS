@@ -163,21 +163,21 @@ export default function PermissionTree({ apiData }: { apiData: ApiResponse }) {
   };
 
   const renderHighlightedText = (text: string, search: string) => {
-    if (!search.trim()) return <span>{text}</span>;
-    const regex = new RegExp(`(${search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
-    const parts = text.split(regex);
-    return (
-      <span>
-        {parts.map((part, index) => 
-          regex.test(part) ? (
-            <mark key={index} style={{ backgroundColor: '#ccf2f4', padding: '2px 0', color: 'inherit', borderRadius: 2 }}>{part}</mark>
-          ) : (
-            part
-          )
-        )}
-      </span>
-    );
-  };
+  if (!search.trim()) return <span>{text}</span>;
+  const regex = new RegExp(`(${search.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+  const parts = text.split(regex);
+  return (
+    <span>
+      {parts.map((part, index) => 
+        regex.test(part) ? (
+          <mark key={index} style={{ backgroundColor: '#ccf2f4', padding: '2px 0', color: 'inherit', borderRadius: 2 }}>{part}</mark>
+        ) : (
+          part
+        )
+      )}
+    </span>
+  );
+};
 
   const CustomCheckbox = ({ checked, disabled, onChange }: { checked: boolean; disabled: boolean; onChange: (e: any) => void }) => {
     return (
